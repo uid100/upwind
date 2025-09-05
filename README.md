@@ -17,3 +17,19 @@ Which boat gets to the weather mark first and by how much?
 .8 mile beat
 .9 mile beat
 ```
+
+
+my-flask-app/
+│
+├── app.py                # main Flask entry point
+├── requirements.txt      # Python dependencies
+├── runtime.txt           # optional, specify Python version
+├── .deployment           # optional, custom startup command
+└── .gitignore
+
+
+
+az webapp config set \
+    --resource-group myflask-rg \
+    --name upwind \
+    --startup-file "gunicorn --bind=0.0.0.0 --timeout 600 app:app"
