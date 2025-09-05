@@ -41,18 +41,18 @@ def make_bent_line(angle_deg, final_y):
 @app.route("/", methods=["GET", "POST"])
 def index():
     # Endpoint distance (final Y)
-    distance = float(request.form.get("distance", 1.0))
+    distance = float(request.form.get("distance", 0.6))
     # Units
     units = request.form.get("units", "miles")
     speed_units = request.form.get("speed_units", "knots")
     length_units = request.form.get("length_units", "ft")
     # Boat inputs
-    speed_a = float(request.form.get("speed_a", 4.0))
-    angle_a = float(request.form.get("angle_a", 40))
-    length_a = float(request.form.get("length_a", 20.0))
-    speed_b = float(request.form.get("speed_b", 5.0))
-    angle_b = float(request.form.get("angle_b", 50))
-    length_b = float(request.form.get("length_b", 20.0))
+    speed_a = float(request.form.get("speed_a", 4.9))
+    angle_a = float(request.form.get("angle_a", 30))
+    length_a = float(request.form.get("length_a", 16.4))
+    speed_b = float(request.form.get("speed_b", 5.4))
+    angle_b = float(request.form.get("angle_b", 35))
+    length_b = float(request.form.get("length_b", 16.4))
     # Lengths/sec
     lengths_per_sec_a = speed_a / length_a
     lengths_per_sec_b = speed_b / length_b
