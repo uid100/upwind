@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Boat Track Simulator</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.card { margin-bottom: 20px; }
+.plot-card img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+label { font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container my-3">
+
+<form method="POST">
+
+<!-- Boat Cards -->
+<div class="row">
+  <div class="col-md-6 col-12">
+    <div class="card">
+      <div class="card-header text-center">Boat A</div>
+      <div class="card-body">
+        <div class="mb-2">
+          <label>Speed</label>
+          <input type="number" class="form-control" name="speed_a" step="0.1" value="{{ speed_a }}">
+        </div>
+        <div class="mb-2">
+          <label>Angle</label>
+          <input type="number" class="form-control" name="angle_a" step="1" value="{{ angle_a }}">
+        </div>
+        <div class="mb-2">
+          <label>Boat Length</label>
+          <input type="number" class="form-control" name="length_a" step="0.1" value="{{ length_a }}">
+        </div>
+        <div class="mb-2">
+          <label>Lengths/sec:</label>
+          <span id="lengths_sec_a">{{ "%.2f"|format(lengths_per_sec_a) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-12">
+    <div class="card">
+      <div class="card-header text-center">Boat B</div>
+      <div class="card-body">
+        <div class="mb-2">
+          <label>Speed</label>
+          <input type="number" class="form-control" name="speed_b" step="0.1" value="{{ speed_b }}">
+        </div>
+        <div class="mb-2">
+          <label>Angle</label>
+          <input type="number" class="form-control" name="angle_b" step="1" value="{{ angle_b }}">
+        </div>
+        <div class="mb-2">
+          <label>Boat Length</label>
+          <input type="number" class="form-control" name="length_b" step="0.1" value="{{ length_b }}">
+        </div>
+        <div class="mb-2">
+          <label>Lengths/sec:</label>
+          <span id="lengths_sec_b">{{ "%.2f"|format(lengths_per_sec_b) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Plot -->
+<div class="row">
+  <div class="col-12">
+    <div class="card plot-card">
+      <div class="card-body text-center">
+        <img src="data:image/png;base64,{{ plot_url }}" alt="XY plot">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Card -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header text-center">Settings</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 col-6 mb-2">
+            <label>Distance Units</label>
+            <select class="form-select" name="units">
+              <option value="miles" {% if units=="miles" %}selected{% endif %}>Miles</option>
+              <option value="km" {% if units=="km" %}selected{% endif %}>Kilometers</option>
+              <option value="nm" {% if units=="nm" %}selected{% endif %}>Nautical Miles</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-6 mb-2">
+            <label>Speed Units</label>
+            <select class="form-select" name="speed_units">
+              <option value="knots" {% if speed_units=="knots" %}selected{% endif %}>Knots</option>
+              <option value="mph" {% if speed_units=="mph" %}selected{% endif %}>Miles/hour</option>
+              <option value="kmh" {% if speed_units=="kmh" %}selected{% endif %}>Kilometers/hour</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-6 mb-2">
+            <label>Length Units</label>
+            <select class="form-select" name="length_units">
+              <option value="ft" {% if length_units=="ft" %}selected{% endif %}>Feet</option>
+              <option value="m" {% if length_units=="m" %}selected{% endif %}>Meters</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-6 mb-2">
+            <label>Endpoint Distance</label>
+            <input type="number" class="form-control" name="distance" step="0.1" value="{{ distance }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Submit Button -->
+<div class="text-center mb-4">
+  <button type="submit" class="btn btn-primary">Update Plot</button>
+</div>
+
+</form>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
