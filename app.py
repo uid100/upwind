@@ -97,7 +97,8 @@ def index():
     # Time & distance difference
     time_diff_sec = abs(total_time_a - total_time_b) * 3600
     max_boat_length = max(length_a, length_b)
-    dist_diff_lengths = abs(total_len_a - total_len_b) / max_boat_length
+    lps = max(lengths_per_sec_a, lengths_per_sec_b)
+    dist_diff_lengths = time_diff_sec * lps
     diff_label = f"ΔTime: {time_diff_sec:.1f} s, ΔDistance: {dist_diff_lengths:.2f} boat lengths"
     ax.plot([], [], ' ', label=diff_label)  # invisible line for legend
 
